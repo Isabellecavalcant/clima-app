@@ -76,12 +76,14 @@ class _SearchScreenState extends State<SearchScreen> {
                       trailing: IconButton(
                         icon: const Icon(Icons.add),
                         onPressed: () {
-                          controller.addCity(city);
+                          final added = controller.addCity(city);
 
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
-                                "${city.name} adicionada!",
+                                added
+                                    ? "${city.name} adicionada!"
+                                    : "${city.name} já está cadastrada.",
                               ),
                             ),
                           );

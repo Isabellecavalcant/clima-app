@@ -62,8 +62,13 @@ class WeatherController {
     favorites.value = list;
   }
 
-  void addCity(City city) {
-    cities.add(city);
+  bool addCity(City city) {
+    if (!cities.contains(city)) {
+      cities.add(city);
+      return true;
+    }
+
+    return false;
   }
 
   Future<void> searchCity(String cityName) async {
