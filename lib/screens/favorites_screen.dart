@@ -31,8 +31,15 @@ class FavoritesScreen extends StatelessWidget {
                     "https://picsum.photos/seed/${city.name}/200",
                   ),
                 ),
+
                 title: Text(city.name),
-                subtitle: Text(city.country),
+
+                subtitle: Text(
+                  "${city.flag} ${city.country}\n"
+                  "${city.temp?.toStringAsFixed(1) ?? '--'} °C",
+                ),
+
+                isThreeLine: true,
               );
             },
           );

@@ -16,24 +16,28 @@ class WeatherController {
     City(
       name: "Natal",
       country: "Brasil",
+      countryCode: "BR",
       lat: -5.79,
       lon: -35.20,
     ),
     City(
       name: "Paris",
       country: "França",
+      countryCode: "FR",
       lat: 48.85,
       lon: 2.35,
     ),
     City(
       name: "Tóquio",
       country: "Japão",
+      countryCode: "JP",
       lat: 35.68,
       lon: 139.69,
     ),
     City(
       name: "Nova York",
       country: "EUA",
+      countryCode: "US",
       lat: 40.71,
       lon: -74.00,
     ),

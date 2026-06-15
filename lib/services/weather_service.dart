@@ -25,7 +25,9 @@ class WeatherService {
 
   Future<List<City>> searchCity(String cityName) async {
     final url = Uri.parse(
-      'https://geocoding-api.open-meteo.com/v1/search?name=$cityName&count=10',
+      'https://geocoding-api.open-meteo.com/v1/search'
+      '?name=$cityName'
+      '&count=10',
     );
 
     final response = await http.get(url);
@@ -45,6 +47,7 @@ class WeatherService {
           (item) => City(
             name: item['name'],
             country: item['country'] ?? '',
+            countryCode: item['country_code'] ?? '',
             lat: item['latitude'].toDouble(),
             lon: item['longitude'].toDouble(),
           ),

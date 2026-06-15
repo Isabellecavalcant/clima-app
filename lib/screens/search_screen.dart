@@ -72,7 +72,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
                     return ListTile(
                       title: Text(city.name),
-                      subtitle: Text(city.country),
+                      subtitle: Text("${city.flag} ${city.country}"),
                       trailing: IconButton(
                         icon: const Icon(Icons.add),
                         onPressed: () {
@@ -114,7 +114,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         ),
                       ),
                       title: Text(city.name),
-                      subtitle: Text(city.country),
+                      subtitle: Text("${city.flag} ${city.country}"),
 
                       onTap: () async {
                         await controller.loadWeather(city);

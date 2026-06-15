@@ -128,7 +128,7 @@ class DetailScreen extends StatelessWidget {
             const SizedBox(height: 10),
 
             Text(
-              city.country,
+              "${city.flag} ${city.country}",
               style: const TextStyle(
                 fontSize: 18,
               ),
