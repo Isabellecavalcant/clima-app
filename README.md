@@ -1,17 +1,18 @@
 # clima_app
 
-A new Flutter project.
+Aplicativo de clima desenvolvido em Flutter utilizando a API Open-Meteo.
 
-## Getting Started
+## Funcionalidades
 
-This project is a starting point for a Flutter application.
+- Pesquisa dinâmica de cidades
+- Consulta de clima em tempo real
+- Sistema de favoritos
+- Busca de novas cidades via Open-Meteo
+- Navegação por rotas utilizando GetX
 
-A few resources to get you started if this is your first Flutter project:
+## Tecnologias
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Flutter
+- Dart
+- GetX
+- Open-Meteo API
