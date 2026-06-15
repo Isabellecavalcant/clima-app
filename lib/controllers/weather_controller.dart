@@ -1,0 +1,77 @@
+import 'package:flutter/material.dart';
+
+import '../models/city.dart';
+import '../services/weather_service.dart';
+
+class WeatherController {
+  final WeatherService service = WeatherService();
+
+  final ValueNotifier<List<City>> favorites =
+      ValueNotifier([]);
+  
+  final ValueNotifier<List<City>> searchResults =
+    ValueNotifier([]);
+
+  final List<City> cities = [
+    City(
+      name: "Natal",
+      country: "Brasil",
+      lat: -5.79,
+      lon: -35.20,
+    ),
+    City(
+      name: "Paris",
+      country: "França",
+      lat: 48.85,
+      lon: 2.35,
+    ),
+    City(
+      name: "Tóquio",
+      country: "Japão",
+      lat: 35.68,
+      lon: 139.69,
+    ),
+    City(
+      name: "Nova York",
+      country: "EUA",
+      lat: 40.71,
+      lon: -74.00,
+    ),
+  ];
+
+  Future<void> loadWeather(City city) async {
+    final data =
+        await service.getWeather(city.lat, city.lon);
+
+    city.temp =
+        data['current']['temperature_2m'];
+
+    city.weatherCode =
+        data['current']['weather_code'];
+  }
+
+  void toggleFavorite(City city) {
+    final list = List<City>.from(favorites.value);
+
+    if (list.contains(city)) {
+      list.remove(city);
+    } else {
+      list.add(city);
+    }
+
+    favorites.value = list;
+  }
+
+  void addCity(City city) {
+    cities.add(city);
+  }
+
+  Future<void> searchCity(String cityName) async {
+    final result =
+        await service.searchCity(cityName);
+
+    searchResults.value = result;
+  }
+}
+
+final controller = WeatherController();
