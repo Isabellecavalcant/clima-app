@@ -11,76 +11,94 @@ class DetailScreen extends StatelessWidget {
   });
 
   IconData getWeatherIcon(int? code) {
-    if (code == null) {
-      return Icons.help_outline;
-    }
+  if (code == null) {
+    return Icons.help_outline;
+  }
 
-    // Céu limpo
-    if (code == 0) {
-      return Icons.wb_sunny;
-    }
+  // Céu limpo
+  if (code == 0) {
+    return Icons.wb_sunny;
+  }
 
-    // Parcialmente nublado / nublado
-    if (code >= 1 && code <= 3) {
-      return Icons.cloud;
-    }
+  // Principalmente limpo
+  if (code == 1) {
+    return Icons.wb_sunny;
+  }
 
-    // Nevoeiro
-    if (code == 45 || code == 48) {
-      return Icons.cloud;
-    }
+  // Parcialmente nublado
+  if (code == 2) {
+    return Icons.wb_cloudy;
+  }
 
-    // Chuva
-    if ((code >= 51 && code <= 67) ||
-        (code >= 80 && code <= 82)) {
-      return Icons.water_drop;
-    }
-
-    // Neve
-    if (code >= 71 && code <= 77) {
-      return Icons.ac_unit;
-    }
-
-    // Tempestade
-    if (code >= 95 && code <= 99) {
-      return Icons.thunderstorm;
-    }
-
+  // Nublado
+  if (code == 3) {
     return Icons.cloud;
   }
 
-  String getWeatherDescription(int? code) {
-    if (code == null) {
-      return "Clima desconhecido";
-    }
-
-    if (code == 0) {
-      return "Ensolarado";
-    }
-
-    if (code >= 1 && code <= 3) {
-      return "Nublado";
-    }
-
-    if (code == 45 || code == 48) {
-      return "Nevoeiro";
-    }
-
-    if ((code >= 51 && code <= 67) ||
-        (code >= 80 && code <= 82)) {
-      return "Chuvoso";
-    }
-
-    if (code >= 71 && code <= 77) {
-      return "Nevando";
-    }
-
-    if (code >= 95 && code <= 99) {
-      return "Tempestade";
-    }
-
-    return "Clima indefinido";
+  // Nevoeiro
+  if (code == 45 || code == 48) {
+    return Icons.cloud;
   }
+
+  // Chuva
+  if ((code >= 51 && code <= 67) ||
+      (code >= 80 && code <= 82)) {
+    return Icons.water_drop;
+  }
+
+  // Neve
+  if (code >= 71 && code <= 77) {
+    return Icons.ac_unit;
+  }
+
+  // Tempestade
+  if (code >= 95 && code <= 99) {
+    return Icons.thunderstorm;
+  }
+
+  return Icons.cloud;
+}
+
+  String getWeatherDescription(int? code) {
+  if (code == null) {
+    return "Clima desconhecido";
+  }
+
+  if (code == 0) {
+    return "Céu limpo";
+  }
+
+  if (code == 1) {
+    return "Principalmente limpo";
+  }
+
+  if (code == 2) {
+    return "Parcialmente nublado";
+  }
+
+  if (code == 3) {
+    return "Nublado";
+  }
+
+  if (code == 45 || code == 48) {
+    return "Nevoeiro";
+  }
+
+  if ((code >= 51 && code <= 67) ||
+      (code >= 80 && code <= 82)) {
+    return "Chuvoso";
+  }
+
+  if (code >= 71 && code <= 77) {
+    return "Nevando";
+  }
+
+  if (code >= 95 && code <= 99) {
+    return "Tempestade";
+  }
+
+  return "Clima indefinido";
+}
 
   @override
   Widget build(BuildContext context) {
