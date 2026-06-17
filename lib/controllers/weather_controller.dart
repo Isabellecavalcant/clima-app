@@ -48,10 +48,10 @@ class WeatherController {
     city.weatherCode = data['current']['weather_code'];
   }
 
-  void toggleFavorite(City city) {
-    final list = List<City>.from(favorites.value);
+  void toggleFavorite(City city) async {
+  final list = List<City>.from(favorites.value);
 
-    if (list.contains(city)) {
+  if (list.contains(city)) {
       list.remove(city);
     } else {
       list.add(city);

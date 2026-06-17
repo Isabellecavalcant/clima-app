@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../controllers/weather_controller.dart';
 import '../models/city.dart';
@@ -73,6 +74,14 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                               "${city.flag} ${city.country}\n"
                               "${city.temp?.toStringAsFixed(1) ?? '--'} °C",
                             ),
+                            onTap: () async {
+                              await controller.loadWeather(city);
+
+                              Get.toNamed(
+                                '/details',
+                                arguments: city,
+                              );
+                            },
                             isThreeLine: true,
                           );
                         },
