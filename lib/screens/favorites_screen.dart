@@ -15,6 +15,20 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   String filtro = "";
 
   @override
+  void initState() {
+    super.initState();
+    carregarTemperaturas();
+  }
+
+  Future<void> carregarTemperaturas() async {
+    for (final city in controller.favorites.value) {
+      await controller.loadWeather(city);
+    }
+
+    controller.favorites.value = List.from(controller.favorites.value);
+  }  
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
