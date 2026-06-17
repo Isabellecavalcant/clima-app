@@ -151,6 +151,33 @@ class DetailScreen extends StatelessWidget {
                 fontSize: 18,
               ),
             ),
+
+            const SizedBox(height: 10),
+
+            Text(
+              city.state.isNotEmpty
+                  ? "Estado/Região: ${city.state}"
+                  : "Estado/Região: não informado",
+              style: const TextStyle(
+                fontSize: 16,
+              ),
+            ),
+
+            const SizedBox(height: 10),
+
+            Text(
+              "Latitude: ${city.lat.toStringAsFixed(2)}",
+              style: const TextStyle(
+                fontSize: 16,
+              ),
+            ),
+
+            Text(
+              "Longitude: ${city.lon.toStringAsFixed(2)}",
+              style: const TextStyle(
+                fontSize: 16,
+              ),
+            ),
           ],
         ),
       ),

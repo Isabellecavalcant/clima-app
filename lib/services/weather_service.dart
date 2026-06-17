@@ -49,6 +49,7 @@ class WeatherService {
             name: item['name'],
             country: item['country'] ?? '',
             countryCode: item['country_code'] ?? '',
+            state: item['admin1'] ?? '',
             lat: item['latitude'].toDouble(),
             lon: item['longitude'].toDouble(),
           ),

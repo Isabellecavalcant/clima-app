@@ -2,6 +2,7 @@ class City {
   String name;
   String country;
   String countryCode;
+  String state;
   double lat;
   double lon;
 
@@ -15,6 +16,7 @@ class City {
     required this.lat,
     required this.lon,
     this.countryCode = '',
+    this.state = '',
     this.temp,
     this.weatherCode,
     this.imageUrl,
