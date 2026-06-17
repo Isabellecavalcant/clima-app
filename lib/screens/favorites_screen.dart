@@ -52,7 +52,6 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                   },
                 ),
               ),
-
               Expanded(
                 child: favoritosFiltrados.isEmpty
                     ? const Center(
@@ -66,17 +65,14 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                           return ListTile(
                             leading: CircleAvatar(
                               backgroundImage: NetworkImage(
-                                "https://picsum.photos/seed/${city.name}/200",
+                                "https://picsum.photos/seed/${city.name}-${city.country}/200",
                               ),
                             ),
-
                             title: Text(city.name),
-
                             subtitle: Text(
                               "${city.flag} ${city.country}\n"
                               "${city.temp?.toStringAsFixed(1) ?? '--'} °C",
                             ),
-
                             isThreeLine: true,
                           );
                         },

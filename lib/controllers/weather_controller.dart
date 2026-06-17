@@ -6,11 +6,9 @@ import '../services/weather_service.dart';
 class WeatherController {
   final WeatherService service = WeatherService();
 
-  final ValueNotifier<List<City>> favorites =
-      ValueNotifier([]);
-  
-  final ValueNotifier<List<City>> searchResults =
-    ValueNotifier([]);
+  final ValueNotifier<List<City>> favorites = ValueNotifier([]);
+
+  final ValueNotifier<List<City>> searchResults = ValueNotifier([]);
 
   final List<City> cities = [
     City(
@@ -44,14 +42,10 @@ class WeatherController {
   ];
 
   Future<void> loadWeather(City city) async {
-    final data =
-        await service.getWeather(city.lat, city.lon);
+    final data = await service.getWeather(city.lat, city.lon);
 
-    city.temp =
-        data['current']['temperature_2m'];
-
-    city.weatherCode =
-        data['current']['weather_code'];
+    city.temp = data['current']['temperature_2m'];
+    city.weatherCode = data['current']['weather_code'];
   }
 
   void toggleFavorite(City city) {
@@ -67,17 +61,22 @@ class WeatherController {
   }
 
   bool addCity(City city) {
-    if (!cities.contains(city)) {
-      cities.add(city);
-      return true;
-    }
+  final exists = cities.any(
+    (c) =>
+        (c.lat - city.lat).abs() < 0.1 &&
+        (c.lon - city.lon).abs() < 0.1,
+  );
 
-    return false;
+  if (!exists) {
+    cities.add(city);
+    return true;
   }
 
+  return false;
+}
+
   Future<void> searchCity(String cityName) async {
-    final result =
-        await service.searchCity(cityName);
+    final result = await service.searchCity(cityName);
 
     searchResults.value = result;
   }

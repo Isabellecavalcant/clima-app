@@ -7,6 +7,7 @@ class City {
 
   double? temp;
   int? weatherCode;
+  String? imageUrl;
 
   City({
     required this.name,
@@ -16,6 +17,7 @@ class City {
     this.countryCode = '',
     this.temp,
     this.weatherCode,
+    this.imageUrl,
   });
 
   String get flag {
@@ -31,10 +33,15 @@ class City {
   }
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is City && other.name == name && other.country == country;
+bool operator ==(Object other) =>
+    identical(this, other) ||
+    other is City &&
+        lat.toStringAsFixed(2) == other.lat.toStringAsFixed(2) &&
+        lon.toStringAsFixed(2) == other.lon.toStringAsFixed(2);
 
-  @override
-  int get hashCode => Object.hash(name, country);
+@override
+int get hashCode => Object.hash(
+      lat.toStringAsFixed(2),
+      lon.toStringAsFixed(2),
+    );
 }

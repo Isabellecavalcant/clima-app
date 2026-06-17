@@ -16,11 +16,8 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<City> cidadesFiltradas =
-        controller.cities.where((cidade) {
-      return cidade.name
-          .toLowerCase()
-          .contains(filtro.toLowerCase());
+    List<City> cidadesFiltradas = controller.cities.where((cidade) {
+      return cidade.name.toLowerCase().contains(filtro.toLowerCase());
     }).toList();
 
     return Scaffold(
@@ -35,6 +32,7 @@ class _SearchScreenState extends State<SearchScreen> {
               decoration: const InputDecoration(
                 labelText: "Pesquisar cidade",
                 border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.search),
               ),
               onChanged: (value) {
                 setState(() {
@@ -43,19 +41,18 @@ class _SearchScreenState extends State<SearchScreen> {
               },
             ),
           ),
-
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: ElevatedButton(
+            child: ElevatedButton.icon(
               onPressed: () async {
                 if (filtro.isNotEmpty) {
                   await controller.searchCity(filtro);
                 }
               },
-              child: const Text("Buscar na Open-Meteo"),
+              icon: const Icon(Icons.public),
+              label: const Text("Buscar na Open-Meteo"),
             ),
           ),
-
           ValueListenableBuilder<List<City>>(
             valueListenable: controller.searchResults,
             builder: (context, results, child) {
@@ -97,9 +94,8 @@ class _SearchScreenState extends State<SearchScreen> {
               );
             },
           ),
-
           Expanded(
-            child: ValueListenableBuilder(
+            child: ValueListenableBuilder<List<City>>(
               valueListenable: controller.favorites,
               builder: (context, favorites, child) {
                 return ListView.builder(
@@ -110,12 +106,11 @@ class _SearchScreenState extends State<SearchScreen> {
                     return ListTile(
                       leading: CircleAvatar(
                         backgroundImage: NetworkImage(
-                          "https://picsum.photos/seed/${city.name}/200",
+                          "https://picsum.photos/seed/${city.name}-${city.country}/200",
                         ),
                       ),
                       title: Text(city.name),
                       subtitle: Text("${city.flag} ${city.country}"),
-
                       onTap: () async {
                         await controller.loadWeather(city);
 
@@ -124,7 +119,6 @@ class _SearchScreenState extends State<SearchScreen> {
                           arguments: city,
                         );
                       },
-
                       trailing: IconButton(
                         icon: Icon(
                           favorites.contains(city)
