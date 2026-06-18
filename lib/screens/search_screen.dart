@@ -14,6 +14,23 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   String filtro = "";
 
+  Widget citySubtitle(City city) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text("${city.flag} ${city.country}"),
+        if (city.state.isNotEmpty)
+          Text(
+            city.state,
+            style: const TextStyle(
+              fontSize: 12,
+              color: Colors.grey,
+            ),
+          ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     List<City> cidadesFiltradas = controller.cities.where((cidade) {
@@ -69,7 +86,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
                     return ListTile(
                       title: Text(city.name),
-                      subtitle: Text("${city.flag} ${city.country}"),
+                      subtitle: citySubtitle(city),
                       trailing: IconButton(
                         icon: const Icon(Icons.add),
                         onPressed: () {
@@ -110,7 +127,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         ),
                       ),
                       title: Text(city.name),
-                      subtitle: Text("${city.flag} ${city.country}"),
+                      subtitle: citySubtitle(city),
                       onTap: () async {
                         await controller.loadWeather(city);
 

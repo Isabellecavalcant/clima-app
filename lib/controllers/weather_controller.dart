@@ -79,10 +79,57 @@ class WeatherController {
   return false;
 }
 
+String normalizeText(String text) {
+  return text
+      .toLowerCase()
+      .replaceAll('á', 'a')
+      .replaceAll('à', 'a')
+      .replaceAll('ã', 'a')
+      .replaceAll('â', 'a')
+      .replaceAll('é', 'e')
+      .replaceAll('ê', 'e')
+      .replaceAll('í', 'i')
+      .replaceAll('ó', 'o')
+      .replaceAll('ô', 'o')
+      .replaceAll('õ', 'o')
+      .replaceAll('ú', 'u')
+      .replaceAll('ç', 'c')
+      .trim();
+}
+
   Future<void> searchCity(String cityName) async {
     final result = await service.searchCity(cityName);
 
-    searchResults.value = result;
+    final uniqueResults = <City>[];
+
+    for (final city in result) {
+      final exists = uniqueResults.any((c) {
+        final sameName =
+            normalizeText(c.name) == normalizeText(city.name);
+
+        final sameState =
+            normalizeText(c.state) == normalizeText(city.state);
+
+        final sameCountry =
+            c.countryCode.toUpperCase() ==
+            city.countryCode.toUpperCase();
+
+        final nearCoordinates =
+            (c.lat - city.lat).abs() < 0.05 &&
+            (c.lon - city.lon).abs() < 0.05;
+
+        return sameName &&
+            sameState &&
+            sameCountry &&
+            nearCoordinates;
+      });
+
+      if (!exists) {
+        uniqueResults.add(city);
+      }
+    }
+
+    searchResults.value = uniqueResults;
   }
 }
 
