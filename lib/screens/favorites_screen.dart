@@ -77,26 +77,32 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                         itemBuilder: (context, index) {
                           final city = favoritosFiltrados[index];
 
-                          return ListTile(
-                            leading: CircleAvatar(
-                              backgroundImage: NetworkImage(
-                                "https://picsum.photos/seed/${city.name}-${city.country}/200",
+                          return Card(
+                            margin: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 4,
+                            ),
+                            child: ListTile(
+                              leading: CircleAvatar(
+                                backgroundImage: NetworkImage(
+                                  "https://picsum.photos/seed/${city.name}-${city.country}/200",
+                                ),
                               ),
-                            ),
-                            title: Text(city.name),
-                            subtitle: Text(
-                              "${city.flag} ${city.country}\n"
-                              "${city.temp?.toStringAsFixed(1) ?? '--'} °C",
-                            ),
-                            onTap: () async {
-                              await controller.loadWeather(city);
+                              title: Text(city.name),
+                              subtitle: Text(
+                                "${city.flag} ${city.country}\n"
+                                "${city.temp?.toStringAsFixed(1) ?? '--'} °C",
+                              ),
+                              onTap: () async {
+                                await controller.loadWeather(city);
 
-                              Get.toNamed(
-                                '/details',
-                                arguments: city,
-                              );
-                            },
-                            isThreeLine: true,
+                                Get.toNamed(
+                                  '/details',
+                                  arguments: city,
+                                );
+                              },
+                              isThreeLine: true,
+                            ),
                           );
                         },
                       ),

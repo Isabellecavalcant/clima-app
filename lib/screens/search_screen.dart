@@ -84,26 +84,32 @@ class _SearchScreenState extends State<SearchScreen> {
                   itemBuilder: (context, index) {
                     final city = results[index];
 
-                    return ListTile(
-                      title: Text(city.name),
-                      subtitle: citySubtitle(city),
-                      trailing: IconButton(
-                        icon: const Icon(Icons.add),
-                        onPressed: () {
-                          final added = controller.addCity(city);
+                    return Card(
+                      margin: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
+                      child: ListTile(
+                        title: Text(city.name),
+                        subtitle: citySubtitle(city),
+                        trailing: IconButton(
+                          icon: const Icon(Icons.add),
+                          onPressed: () {
+                            final added = controller.addCity(city);
 
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                added
-                                    ? "${city.name} adicionada!"
-                                    : "${city.name} já está cadastrada.",
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  added
+                                      ? "${city.name} adicionada!"
+                                      : "${city.name} já está cadastrada.",
+                                ),
                               ),
-                            ),
-                          );
+                            );
 
-                          setState(() {});
-                        },
+                            setState(() {});
+                          },
+                        ),
                       ),
                     );
                   },
@@ -120,31 +126,37 @@ class _SearchScreenState extends State<SearchScreen> {
                   itemBuilder: (context, index) {
                     final city = cidadesFiltradas[index];
 
-                    return ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: NetworkImage(
-                          "https://picsum.photos/seed/${city.name}-${city.country}/200",
-                        ),
+                    return Card(
+                      margin: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
                       ),
-                      title: Text(city.name),
-                      subtitle: citySubtitle(city),
-                      onTap: () async {
-                        await controller.loadWeather(city);
-
-                        Get.toNamed(
-                          '/details',
-                          arguments: city,
-                        );
-                      },
-                      trailing: IconButton(
-                        icon: Icon(
-                          favorites.contains(city)
-                              ? Icons.favorite
-                              : Icons.favorite_border,
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: NetworkImage(
+                            "https://picsum.photos/seed/${city.name}-${city.country}/200",
+                          ),
                         ),
-                        onPressed: () {
-                          controller.toggleFavorite(city);
+                        title: Text(city.name),
+                        subtitle: citySubtitle(city),
+                        onTap: () async {
+                          await controller.loadWeather(city);
+
+                          Get.toNamed(
+                            '/details',
+                            arguments: city,
+                          );
                         },
+                        trailing: IconButton(
+                          icon: Icon(
+                            favorites.contains(city)
+                                ? Icons.favorite
+                                : Icons.favorite_border,
+                          ),
+                          onPressed: () {
+                            controller.toggleFavorite(city);
+                          },
+                        ),
                       ),
                     );
                   },
